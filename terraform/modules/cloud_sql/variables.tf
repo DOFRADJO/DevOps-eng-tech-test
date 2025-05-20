@@ -1,3 +1,6 @@
+#this file content declaration of specific variable that the module of the component that we can re-use
+#use not the values of that variable
+
 variable "instance_name" {
  type        = string
  description = "name of the instance where we will initialized database"
