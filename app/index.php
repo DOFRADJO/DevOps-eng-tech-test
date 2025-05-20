@@ -1,0 +1,1 @@
+<?php echo "(provide a simple PHP script as a starting point)" ;?>
