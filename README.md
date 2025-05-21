@@ -45,7 +45,7 @@ Before setting up and deploye this project, ensure that you have the following i
 * **Terraform**: [Installation Guide](https://developer.hashicorp.com/terraform/downloads)
 * **Docker Desktop (or Docker Engine)**: [Installation Guide](https://www.docker.com/products/docker-desktop)
 * A **Google Cloud Project** with billing enabled.
-* A **GitHub account** and a new **public GitHub repository** for this project[cite: 1].
+* A **GitHub account** and a new **public GitHub repository** for this project.
 
 ## 4. Project Setup
 ### GitHub Setup
@@ -93,7 +93,7 @@ for local Terraform execution, you should define your variable. You can do this 
 
 ### Application Deployment (CI/CD)
 
-The application code (PHP script, Nginx config, Dockerfile) is deployed automatically via GitHub Actions upon a push to the `main` branch[cite: 1].
+The application code (PHP script, Nginx config, Dockerfile) is deployed automatically via GitHub Actions upon a push to the `main` branch.
 
 1.  **Push your code** to the `main` branch of your GitHub repository. This includes:
     * `app/index.php`
@@ -102,11 +102,11 @@ The application code (PHP script, Nginx config, Dockerfile) is deployed automati
     * `.github/workflows/main.yml` (your CI/CD workflow definition)
 2.  **Monitor the workflow**: Go to the `Actions` tab in your GitHub repository. You should see a workflow run triggered by your push.
 3.  The workflow will perform the following steps:
-    * Check out the code[cite: 1].
+    * Check out the code.
     * Authenticate to Google Cloud using the provided service account key secret.
-    * Build the Docker image based on your `Dockerfile`[cite: 1].
-    * Push the built image to Google Container Registry (GCR)[cite: 1].
-    * Deploy the `latest` tagged image to your Google Cloud Run service, injecting necessary environment variables like database credentials from GitHub secrets[cite: 1].
+    * Build the Docker image based on your `Dockerfile`.
+    * Push the built image to Google Container Registry (GCR).
+    * Deploy the `latest` tagged image to your Google Cloud Run service, injecting necessary environment variables like database credentials from GitHub secrets.
 
 ## 6. Retrieving Public IP (Bash Script)
 
