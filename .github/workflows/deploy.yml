@@ -1,0 +1,49 @@
+name: Deploy to Cloud Run
+
+#triger this workflow on push to the main brqnch
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest  #for the latest available Ubuntu run
+
+    steps:
+      # 1. Checkout the code from the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2. Authenticate with Google Cloud using credentials stored in GitHub Secrets
+      - name: Set up Google Cloud authentication
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_CREDENTIALS }}  # Json key of a services acccount with required permission
+
+      # 3. Instal and Configure the Google Cloud SDK
+      - name: configuring cloud sdk
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          install_components: 'beta'  # for including the beta components if needed(cloud run for eg)
+
+      # 4. Build the Docker image using the Dockerfile in the app/ diretory
+      - name: Build the docker image
+        run: |
+          docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/php-app -f app/Dockerfile app/
+
+      # 5. Push the built Docker image to the Google Container Registry (GCR)
+      - name: Push image to Google Container Registry
+        run: |
+          docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/php-app
+
+      # 6. Deploy the Docker image to the Cloud Run
+      - name: Deploying to Cloud Run
+        run: |
+          gcloud run deploy php-app \
+            --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/php-app \
+            --region ${{ secrets.GCP_REGION }} \
+            --platform managed \
+            --allow-unauthenticated  # Allow public access to the deployed app
+
