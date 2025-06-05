@@ -3,7 +3,7 @@
 This repository contains the solution for the DevOps Engineer Technical Test. The test assesses skills in infrastructure as code (Terraform), CI/CD pipeline development (GitHub Actions), and Bash scripting. The project involves deploying a PHP-FPM application with Nginx within the context of Cloud SQL, Cloud Run, a static file bucket, and a Cloud Load Balancer.
 
 ## Table of Contents
-1. [Project Overview](#1.project-overview)
+1. [Project Overview](#project-overview)
 2. [Architecture](#architecture)
 3. [Prerequisites](#prerequisites)
 4. [Project Setup](#project-setup)
@@ -18,7 +18,7 @@ This repository contains the solution for the DevOps Engineer Technical Test. Th
 8. [Challenges Encountered & Solutions](#challenges-encountered--solutions)
 9. [Future Improvements (Production Ready)](#future-improvements-production-ready)
 
-## 1. Project Overview
+## Project Overview
 
 This project focuses on deploying a simple PHP-FPM web application, served by Nginx, to Google Cloud Run. Key components include:
 
@@ -26,7 +26,7 @@ This project focuses on deploying a simple PHP-FPM web application, served by Ng
 * **CI/CD Pipeline**: GitHub Actions automate the build, push, and deployment process. Environment variables for sensitive information are managed using GitHub secrets.
 * **Bash Scripting**: A Bash script is provided to retrieve the public IP address of the deployed Cloud Run services. It includes error handling, argument parsing for adaptability, and logging capabilities.
 
-## 2. Architecture
+## Architecture
 
 The solution deploys the following Google Cloud resources:
 
@@ -37,7 +37,7 @@ The solution deploys the following Google Cloud resources:
 A high-level flow of requests would be:
 `User Request` -> `Cloud Run Service` -> `Cloud SQL` (for database interactions).
 
-## 3. Prerequisites
+## Prerequisites
 
 Before setting up and deploye this project, ensure that you have the following installed and configured:
 
@@ -47,7 +47,7 @@ Before setting up and deploye this project, ensure that you have the following i
 * A **Google Cloud Project** with billing enabled.
 * A **GitHub account** and a new **public GitHub repository** for this project.
 
-## 4. Project Setup
+## Project Setup
 ### GitHub Setup
 
 1.  **Create a new public GitHub repository**.
@@ -71,7 +71,7 @@ for local Terraform execution, you should define your variable. You can do this 
     ```
     **Remember to add `terraform.tfvars` to your `.gitignore` if it contains sensitive information.**
 
-## 5. Deployment Instructions
+## Deployment Instructions
 
 ### Infrastructure Deployment (Terraform)
 
@@ -108,7 +108,7 @@ The application code (PHP script, Nginx config, Dockerfile) is deployed automati
     * Push the built image to Google Container Registry (GCR).
     * Deploy the `latest` tagged image to your Google Cloud Run service, injecting necessary environment variables like database credentials from GitHub secrets.
 
-## 6. Retrieving Public IP (Bash Script)
+## Retrieving Public IP (Bash Script)
 
 A Bash script `get-pip-cloudrun.sh` is provided to programmatically retrieve the public endpoint of your deployed application. It will attempt to get the Load Balancer IP first, falling back to the Cloud Run service URL if the Load Balancer IP is not found.
 
@@ -121,7 +121,7 @@ A Bash script `get-pip-cloudrun.sh` is provided to programmatically retrieve the
     cd scripts
     .scripts/get-pip-cloudrun.sh 
     ```
-## 7. Troubleshooting Potential Issues
+## Troubleshooting Potential Issues
 
 Here are some common issues you might encounter and tips for debugging:
 
@@ -134,7 +134,7 @@ Here are some common issues you might encounter and tips for debugging:
 * **Bash Script Issues**:
     * **Permissions**: Ensure the script is executable (`chmod +x get-pip-cloudrun.sh`).
 
-## 8. Challenges Encountered & Solutions
+## Challenges Encountered & Solutions
 
 * **Challenge 1: no billing account**
     * _Description:_ Without billing acount that are link to my project, not possibilty to run the cloud tird party of challenges
@@ -144,7 +144,7 @@ Here are some common issues you might encounter and tips for debugging:
     * _Description:_ No possibilty to create ressource load balancer directly with terraform
     * _Solution:_ implement policies rulle member allow to all users
 
-## 9. Future Improvement
+## Future Improvement
 
 For a production-ready environment, the folowing features and best practices would be considered:
 
