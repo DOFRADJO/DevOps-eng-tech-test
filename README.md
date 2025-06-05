@@ -3,7 +3,7 @@
 This repository contains the solution for the DevOps Engineer Technical Test. The test assesses skills in infrastructure as code (Terraform), CI/CD pipeline development (GitHub Actions), and Bash scripting. The project involves deploying a PHP-FPM application with Nginx within the context of Cloud SQL, Cloud Run, a static file bucket, and a Cloud Load Balancer.
 
 ## Table of Contents
-1. [Project Overview](#project-overview)
+1. [Project Overview](#1.project-overview)
 2. [Architecture](#architecture)
 3. [Prerequisites](#prerequisites)
 4. [Project Setup](#project-setup)
@@ -18,7 +18,7 @@ This repository contains the solution for the DevOps Engineer Technical Test. Th
 8. [Challenges Encountered & Solutions](#challenges-encountered--solutions)
 9. [Future Improvements (Production Ready)](#future-improvements-production-ready)
 
-## Project Overview
+## 1. Project Overview
 
 This project focuses on deploying a simple PHP-FPM web application, served by Nginx, to Google Cloud Run. Key components include:
 
