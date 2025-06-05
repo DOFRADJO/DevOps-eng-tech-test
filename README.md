@@ -18,7 +18,7 @@ This repository contains the solution for the DevOps Engineer Technical Test. Th
 8. [Challenges Encountered & Solutions](#challenges-encountered--solutions)
 9. [Future Improvements (Production Ready)](#future-improvements-production-ready)
 
-## 1. Project Overview
+## Project Overview
 
 This project focuses on deploying a simple PHP-FPM web application, served by Nginx, to Google Cloud Run. Key components include:
 
