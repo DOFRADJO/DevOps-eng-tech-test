@@ -1,75 +1,25 @@
-# DevOps Engineer Technical Test - proposed solution DONALD
-
-This repository contains the solution for the DevOps Engineer Technical Test. The test assesses skills in infrastructure as code (Terraform), CI/CD pipeline development (GitHub Actions), and Bash scripting. The project involves deploying a PHP-FPM application with Nginx within the context of Cloud SQL, Cloud Run, a static file bucket, and a Cloud Load Balancer.
-
+# Locally lunch a PHP analysis tool
+This first version of the branch is to lunch locally analysis tool for PHP (PHPStan)
 ## Table of Contents
-1. [Project Overview](#project-overview)
-2. [Architecture](#architecture)
-3. [Prerequisites](#prerequisites)
-4. [Project Setup](#project-setup)
-   - [Google Cloud Setup](#google-cloud-setup)
-   - [GitHub Setup](#github-setup)
-   - [Terraform Environment Variables](#terraform-environment-variables)
-5. [Deployment Instructions](#deployment-instructions)
-   - [Infrastructure Deployment (Terraform)](#infrastructure-deployment-terraform)
-   - [Application Deployment (CI/CD)](#application-deployment-cicd)
-6. [Retrieving Public IP (Bash Script)](#retrieving-public-ip-bash-script)
-7. [Troubleshooting Potential Issues](#troubleshooting-potential-issues)
-8. [Challenges Encountered & Solutions](#challenges-encountered--solutions)
-9. [Future Improvements (Production Ready)](#future-improvements-production-ready)
-
-## Project Overview
-
-This project focuses on deploying a simple PHP-FPM web application, served by Nginx, to Google Cloud Run. Key components include:
-
-* **Infrastructure as Code (IaC)**: Terraform is used to create and manage all necessary Google Cloud resource
-* **CI/CD Pipeline**: GitHub Actions automate the build, push, and deployment process. Environment variables for sensitive information are managed using GitHub secrets.
-* **Bash Scripting**: A Bash script is provided to retrieve the public IP address of the deployed Cloud Run services. It includes error handling, argument parsing for adaptability, and logging capabilities.
-
-## Architecture
-
-The solution deploys the following Google Cloud resources:
-
-* **Google Cloud SQL (MySQL)**: A managed MySQL database instance servers as the backend for the PHP aplication.
-* **Google Cloud Storage**: A bucket designated for serving static files.
-* **Google Cloud Run**
-
-A high-level flow of requests would be:
-`User Request` -> `Cloud Run Service` -> `Cloud SQL` (for database interactions).
+1. [Prerequisites](#prerequisites)
+2. [Setup](#setup)
+3. [Troubleshooting Potential Issues](#troubleshooting-potential-issues)
 
 ## Prerequisites
 
-Before setting up and deploye this project, ensure that you have the following installed and configured:
+Before setting up this project, ensure that you have the following installed and configured:
 
-* **Google Cloud SDK (gcloud CLI)**: [Installation Guide](https://cloud.google.com/sdk/docs/install)
-* **Terraform**: [Installation Guide](https://developer.hashicorp.com/terraform/downloads)
-* **Docker Desktop (or Docker Engine)**: [Installation Guide](https://www.docker.com/products/docker-desktop)
-* A **Google Cloud Project** with billing enabled.
-* A **GitHub account** and a new **public GitHub repository** for this project.
+* **PHP version >=8.3.0**: [Installation Guide](https://www.php.net/downloads.php)
 
-## Project Setup
+## Setup
 ### GitHub Setup
+Clone this repo an switch to the right branch.
+```bash
+git clone https://github.com/bw-gaming/bluewindow-hosting-php.git
+cd bluewindow-hosting-php
+git checkout feature/NEX-13214
+```
 
-1.  **Create a new public GitHub repository**.
-2.  Navigate to your repository's `Settings` -> `Secrets and variables` -> `Actions`.
-3.  Add the following **repository secrets**:
-    * `GCP_CREDENTIALS`: **entire JSON content** of your iam that you have gave role o GCP ID (e.g., `my-php-app-12345`).
-    * `GCP_REGION`: The region where your Google Cloud Project located
-    * `DB_PASSWORD`: The password you want to set for your Cloud SQL database user
-
-### Terraform Environment Variables
-for local Terraform execution, you should define your variable. You can do this by:
- **Using a `terraform.tfvars` file (less secure for sensitive data, but convenient for non-sensitive variables)**:
-    Create a file named `terraform.tfvars` in your Terraform root directory:
-    ```terraform
-    project_id        = "your id project"
-    region            = "region"
-    db_password       = "password"
-    bucket_name       = "${var.project_id}_static_file_bucket"
-    sql_instance_name = "${var.project_id}_sql_instance"
-    database_name     = "${var.project_id}_db"
-    ```
-    **Remember to add `terraform.tfvars` to your `.gitignore` if it contains sensitive information.**
 
 ## Deployment Instructions
 
